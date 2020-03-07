@@ -15,5 +15,35 @@ DisplayName이 결정되는 과정은 아래 순서에 따른다.
 3. 디폴트 DisplayNameGenerator가 설정되어 있으면 해당 Generator에 의해 변환된 값  
 4. DisplayNameGenerator.Standard에 의해 변환된 값   
 
+### Assumptions
+assertion은 조건에 맞지 않으면 테스트가 실패하는 반면 assumption은 조건에 맞지 않으면 skip 한다.
+
+```java
+class AssumptionsTest {
+    @Test
+    void testOnlyOnCiServer() {
+        assumeTrue("CI".equals(System.getenv("ENV")), () -> {
+            // Messages to show when assumption is false
+            return "It runs only on ci servers.";
+        });
+
+        // Unless environment is CI, it never fails.
+        fail();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 2, 10, -12})
+    void testOnlyPositiveNumbers(int value) {
+        assumingThat(value > 0, () -> {
+            // It runs only when assumption is true
+            assertTrue(Calculator.multiply(value, 5) > 0);
+        });
+
+        assertTrue(Calculator.multiply(value, value) >= 0);
+    }
+}
+```
+
+
 ### reference
 https://junit.org/junit5/docs/current/user-guide/

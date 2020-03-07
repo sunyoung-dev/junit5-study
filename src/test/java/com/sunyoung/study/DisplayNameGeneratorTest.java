@@ -1,6 +1,6 @@
 package com.sunyoung.study;
 
-import com.sunyoung.study.calculate.LeapYear;
+import com.sunyoung.study.util.LeapYear;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

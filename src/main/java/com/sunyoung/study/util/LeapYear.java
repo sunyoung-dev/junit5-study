@@ -1,4 +1,4 @@
-package com.sunyoung.study.calculate;
+package com.sunyoung.study.util;
 
 public class LeapYear {
     public static boolean isLeapYear(int year) {
